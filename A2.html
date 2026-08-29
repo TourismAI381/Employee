@@ -949,18 +949,18 @@
                 }
             }
 
-            function updatePlaceholder() {
-                if (completedThreeRounds) {
-                    userInput.placeholder = "想说什么都可以，我在这里...";
-                } else if (currentRound === 0) {
-                    userInput.placeholder = "请根据上方参考内容，表达你的感受...";
-                    showRequiredInput(1, ROUND1_USER_PROMPT);
-                } else if (currentRound === 1) {
-                    userInput.placeholder = "请根据上方参考内容，表达你的感受...";
-                } else if (currentRound === 2) {
-                    userInput.placeholder = "请根据上方参考内容，表达你的感受...";
-                }
-            }
+                function updatePlaceholder() {
+      if (completedThreeRounds) {
+        userInput.placeholder = "想说什么都可以，我在这里...";
+      } else if (currentRound === 0) {
+        userInput.placeholder = "请根据上方参考内容，表达你的感受...";
+        showRequiredInput(1, ROUND1_USER_PROMPT);
+      } else if (currentRound === 1) {
+        userInput.placeholder = "请根据上方参考内容，表达你的感受...";
+      } else if (currentRound === 2) {
+        userInput.placeholder = "请根据上方参考内容，表达你的感受...";
+      }
+    }
 
             function setInputEnabled(enabled) {
                 if (enabled) {
