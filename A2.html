@@ -1,1126 +1,1110 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=1.5">
-  <title>数字化员工支持平台</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=1.5">
+    <title>数字化员工支持平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      background: linear-gradient(135deg, #0f1923 0%, #1a2735 50%, #0d1b2a 100%);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Inter', 'Segoe UI', 'Roboto', system-ui, -apple-system, sans-serif;
-      padding: 20px;
-      margin: 0;
-      position: relative;
-      overflow: hidden;
-    }
+        body {
+            background: linear-gradient(135deg, #0f1923 0%, #1a2735 50%, #0d1b2a 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Inter', 'Segoe UI', 'Roboto', system-ui, -apple-system, sans-serif;
+            padding: 20px;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
 
-    /* 背景装饰 */
-    body::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at 30% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
-                  radial-gradient(circle at 70% 20%, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
-      pointer-events: none;
-    }
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 70% 20%, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
 
-    .app-container {
-      width: 100%;
-      max-width: 800px;
-      height: 90vh;
-      max-height: 900px;
-      background: rgba(17, 25, 40, 0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: 24px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 
-                  0 0 0 1px rgba(255, 255, 255, 0.08),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.05);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      position: relative;
-      z-index: 1;
-    }
+        .app-container {
+            width: 100%;
+            max-width: 800px;
+            height: 90vh;
+            max-height: 900px;
+            background: rgba(17, 25, 40, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6),
+                0 0 0 1px rgba(255, 255, 255, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
 
-    /* 顶部导航栏 */
-    .app-header {
-      padding: 16px 24px;
-      background: rgba(17, 25, 40, 0.95);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
+        .app-header {
+            padding: 16px 24px;
+            background: rgba(17, 25, 40, 0.95);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
 
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-    .platform-logo {
-      width: 38px;
-      height: 38px;
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      color: white;
-      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-    }
+        .platform-logo {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
 
-    .platform-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #e2e8f0;
-      letter-spacing: 0.5px;
-    }
+        .platform-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            letter-spacing: 0.5px;
+        }
 
-    .platform-subtitle {
-      font-size: 0.75rem;
-      color: #94a3b8;
-      font-weight: 400;
-      margin-top: 2px;
-    }
+        .platform-subtitle {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            font-weight: 400;
+            margin-top: 2px;
+        }
 
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
 
-    .status-indicator {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
-      background: rgba(34, 197, 94, 0.1);
-      border-radius: 20px;
-      border: 1px solid rgba(34, 197, 94, 0.2);
-    }
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background: rgba(34, 197, 94, 0.1);
+            border-radius: 20px;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
 
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background: #22c55e;
-      border-radius: 50%;
-      animation: statusPulse 2s infinite;
-    }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: statusPulse 2s infinite;
+        }
 
-    @keyframes statusPulse {
-      0%, 100% {
-        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
-      }
-      50% {
-        box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
-      }
-    }
+        @keyframes statusPulse {
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
+            }
+        }
 
-    .status-text {
-      font-size: 0.8rem;
-      color: #86efac;
-      font-weight: 500;
-    }
+        .status-text {
+            font-size: 0.8rem;
+            color: #86efac;
+            font-weight: 500;
+        }
 
-    .session-info {
-      font-size: 0.75rem;
-      color: #64748b;
-    }
+        .session-info {
+            font-size: 0.75rem;
+            color: #64748b;
+        }
 
-    /* 主聊天区域 */
-    .chat-main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
+        .chat-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
 
-    .messages-area {
-      flex: 1;
-      overflow-y: auto;
-      padding: 20px 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      scroll-behavior: smooth;
-    }
+        .messages-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            scroll-behavior: smooth;
+        }
 
-    /* 自定义滚动条 */
-    .messages-area::-webkit-scrollbar {
-      width: 4px;
-    }
-    .messages-area::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    .messages-area::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-    }
-    .messages-area::-webkit-scrollbar-thumb:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
+        .messages-area::-webkit-scrollbar {
+            width: 4px;
+        }
+        .messages-area::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .messages-area::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        .messages-area::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
 
-    /* 系统提示消息 */
-    .system-message {
-      display: flex;
-      justify-content: center;
-      animation: systemFadeIn 0.8s ease-out;
-    }
+        .system-message {
+            display: flex;
+            justify-content: center;
+            animation: systemFadeIn 0.8s ease-out;
+        }
 
-    @keyframes systemFadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+        @keyframes systemFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    .system-badge {
-      background: rgba(245, 158, 11, 0.1);
-      border: 1px solid rgba(245, 158, 11, 0.2);
-      padding: 8px 16px;
-      border-radius: 20px;
-      color: #fcd34d;
-      font-size: 0.85rem;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+        .system-badge {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: #fcd34d;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-    /* 消息行 */
-    .message-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      width: 100%;
-      animation: messageSlideIn 0.4s ease-out;
-    }
+        .message-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            width: 100%;
+            animation: messageSlideIn 0.4s ease-out;
+        }
 
-    @keyframes messageSlideIn {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+        @keyframes messageSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    .message-row.colleague {
-      justify-content: flex-start;
-    }
+        .message-row.colleague {
+            justify-content: flex-start;
+        }
 
-    .message-row.user {
-      justify-content: flex-end;
-    }
+        .message-row.user {
+            justify-content: flex-end;
+        }
 
-    /* 头像 */
-    .avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      border: 2px solid rgba(255, 255, 255, 0.1);
-    }
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
 
-    .avatar.colleague-avatar {
-      background: linear-gradient(135deg, #92400e, #b45309);
-      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
-    }
+        .avatar.colleague-avatar {
+            background: linear-gradient(135deg, #92400e, #b45309);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
+        }
 
-    .avatar.colleague-avatar::after {
-      content: "👨‍💼";
-      font-size: 20px;
-    }
+        .avatar.colleague-avatar::after {
+            content: "👨‍💼";
+            font-size: 20px;
+        }
 
-    .avatar.user-avatar {
-      background: linear-gradient(135deg, #4a5568, #2d3748);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
+        .avatar.user-avatar {
+            background: linear-gradient(135deg, #4a5568, #2d3748);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
 
-    .avatar.user-avatar::after {
-      content: "👤";
-      font-size: 18px;
-    }
+        .avatar.user-avatar::after {
+            content: "👤";
+            font-size: 18px;
+        }
 
-    /* 聊天气泡 */
-    .bubble {
-      max-width: 70%;
-      padding: 12px 16px;
-      border-radius: 16px;
-      font-size: 0.9rem;
-      line-height: 1.6;
-      word-break: break-word;
-      position: relative;
-    }
+        .bubble {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            word-break: break-word;
+            position: relative;
+        }
 
-    .colleague .bubble {
-      background: rgba(30, 41, 59, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-bottom-left-radius: 4px;
-      color: #e2e8f0;
-    }
+        .colleague .bubble {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom-left-radius: 4px;
+            color: #e2e8f0;
+        }
 
-    .user .bubble {
-      background: rgba(245, 158, 11, 0.15);
-      border: 1px solid rgba(245, 158, 11, 0.2);
-      border-bottom-right-radius: 4px;
-      color: #e2e8f0;
-    }
+        .user .bubble {
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-bottom-right-radius: 4px;
+            color: #e2e8f0;
+        }
 
-    /* 打字机光标 */
-    .typewriter-cursor {
-      display: inline-block;
-      width: 2px;
-      height: 1em;
-      background: #fbbf24;
-      margin-left: 2px;
-      vertical-align: text-bottom;
-      animation: cursorBlink 0.8s infinite;
-    }
+        .typewriter-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background: #fbbf24;
+            margin-left: 2px;
+            vertical-align: text-bottom;
+            animation: cursorBlink 0.8s infinite;
+        }
 
-    @keyframes cursorBlink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
-    }
+        @keyframes cursorBlink {
+            0%,
+            50% {
+                opacity: 1;
+            }
+            51%,
+            100% {
+                opacity: 0;
+            }
+        }
 
-    /* 输入提示 */
-    .typing-indicator {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 16px;
-      background: rgba(30, 41, 59, 0.6);
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      color: #94a3b8;
-      font-size: 0.85rem;
-    }
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
 
-    .typing-dots {
-      display: flex;
-      gap: 3px;
-    }
+        .typing-dots {
+            display: flex;
+            gap: 3px;
+        }
 
-    .typing-dot {
-      width: 6px;
-      height: 6px;
-      background: #fbbf24;
-      border-radius: 50%;
-      animation: typingBounce 1.4s infinite ease-in-out;
-    }
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background: #fbbf24;
+            border-radius: 50%;
+            animation: typingBounce 1.4s infinite ease-in-out;
+        }
 
-    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
 
-    @keyframes typingBounce {
-      0%, 60%, 100% {
-        transform: translateY(0);
-        opacity: 0.3;
-      }
-      30% {
-        transform: translateY(-6px);
-        opacity: 1;
-      }
-    }
+        @keyframes typingBounce {
+            0%,
+            60%,
+            100% {
+                transform: translateY(0);
+                opacity: 0.3;
+            }
+            30% {
+                transform: translateY(-6px);
+                opacity: 1;
+            }
+        }
 
-    /* 需要输入的内容提示卡片 */
-    .required-input-card {
-      background: rgba(251, 191, 36, 0.08);
-      border: 1px solid rgba(251, 191, 36, 0.25);
-      border-radius: 12px;
-      padding: 16px;
-      margin: 0 0 12px 0;
-      animation: cardSlideIn 0.4s ease-out;
-    }
+        .required-input-card {
+            background: rgba(251, 191, 36, 0.08);
+            border: 1px solid rgba(251, 191, 36, 0.25);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 0 0 12px 0;
+            animation: cardSlideIn 0.4s ease-out;
+        }
 
-    @keyframes cardSlideIn {
-      from {
-        opacity: 0;
-        transform: translateY(-5px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+        @keyframes cardSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    .card-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
 
-    .card-icon {
-      font-size: 1.1rem;
-    }
+        .card-icon {
+            font-size: 1.1rem;
+        }
 
-    .card-title {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #fbbf24;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
+        .card-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #fbbf24;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
 
-    .card-content {
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 8px;
-      padding: 12px 14px;
-      font-size: 0.85rem;
-      color: #fcd34d;
-      line-height: 1.6;
-      border: 1px solid rgba(251, 191, 36, 0.15);
-      user-select: text;
-      -webkit-user-select: text;
-      position: relative;
-    }
+        .card-content {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-size: 0.85rem;
+            color: #fcd34d;
+            line-height: 1.6;
+            border: 1px solid rgba(251, 191, 36, 0.15);
+            user-select: text;
+            -webkit-user-select: text;
+            position: relative;
+        }
 
-    .card-content::before {
-      content: '💬 ';
-      font-size: 0.85rem;
-    }
+        .card-content::before {
+            content: '💬 ';
+            font-size: 0.85rem;
+        }
 
-    .card-hint {
-      font-size: 0.75rem;
-      color: #d97706;
-      margin-top: 8px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
+        .card-hint {
+            font-size: 0.75rem;
+            color: #d97706;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
 
-    /* 底部输入区 */
-    .input-area {
-      padding: 16px 24px;
-      background: rgba(17, 25, 40, 0.95);
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-    }
+        .input-area {
+            padding: 16px 24px;
+            background: rgba(17, 25, 40, 0.95);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
 
-    .input-hint {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
+        .input-hint {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
 
-    .hint-text {
-      font-size: 0.8rem;
-      color: #fbbf24;
-      font-weight: 500;
-    }
+        .hint-text {
+            font-size: 0.8rem;
+            color: #fbbf24;
+            font-weight: 500;
+        }
 
-    .round-badge {
-      font-size: 0.75rem;
-      padding: 4px 12px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      color: #94a3b8;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
+        .round-badge {
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            color: #94a3b8;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
 
-    .input-wrapper {
-      display: flex;
-      gap: 10px;
-      align-items: flex-end;
-    }
+        .input-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
 
-    textarea {
-      flex: 1;
-      background: rgba(30, 41, 59, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 12px 16px;
-      color: #e2e8f0;
-      font-size: 0.9rem;
-      resize: none;
-      outline: none;
-      font-family: inherit;
-      line-height: 1.5;
-      transition: all 0.2s;
-      min-height: 44px;
-      max-height: 100px;
-    }
+        textarea {
+            flex: 1;
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: #e2e8f0;
+            font-size: 0.9rem;
+            resize: none;
+            outline: none;
+            font-family: inherit;
+            line-height: 1.5;
+            transition: all 0.2s;
+            min-height: 44px;
+            max-height: 100px;
+        }
 
-    textarea:focus {
-      border-color: rgba(245, 158, 11, 0.4);
-      background: rgba(30, 41, 59, 0.8);
-      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
-    }
+        textarea:focus {
+            border-color: rgba(245, 158, 11, 0.4);
+            background: rgba(30, 41, 59, 0.8);
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
 
-    textarea::placeholder {
-      color: #64748b;
-    }
+        textarea::placeholder {
+            color: #64748b;
+        }
 
-    .send-btn {
-      width: 44px;
-      height: 44px;
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-      border: none;
-      border-radius: 12px;
-      color: white;
-      font-size: 18px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-      flex-shrink: 0;
-    }
+        .send-btn {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
 
-    .send-btn:hover {
-      background: linear-gradient(135deg, #f7b32b, #e08e0b);
-      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-    }
+        .send-btn:hover {
+            background: linear-gradient(135deg, #f7b32b, #e08e0b);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
 
-    .send-btn:active {
-      transform: scale(0.95);
-    }
+        .send-btn:active {
+            transform: scale(0.95);
+        }
 
-    .send-btn.disabled {
-      opacity: 0.4;
-      pointer-events: none;
-      cursor: not-allowed;
-    }
+        .send-btn.disabled {
+            opacity: 0.4;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
 
-    .required-input-container {
-      padding: 0 24px;
-    }
+        .required-input-container {
+            padding: 0 24px;
+        }
 
-    @media (max-width: 600px) {
-      .app-container {
-        height: 100vh;
-        max-height: 100vh;
-        border-radius: 0;
-      }
-      
-      .bubble {
-        max-width: 80%;
-      }
-      
-      .required-input-container {
-        padding: 0 16px;
-      }
-    }
-  </style>
+        @media (max-width: 600px) {
+            .app-container {
+                height: 100vh;
+                max-height: 100vh;
+                border-radius: 0;
+            }
+
+            .bubble {
+                max-width: 80%;
+            }
+
+            .required-input-container {
+                padding: 0 16px;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="app-container">
-  <!-- 顶部导航 -->
-  <div class="app-header">
-    <div class="header-left">
-      <div class="platform-logo">🛡️</div>
-      <div>
-        <div class="platform-title">数字化员工支持平台</div>
-        <div class="platform-subtitle">Employee Support Platform</div>
-      </div>
-    </div>
-    <div class="header-right">
-      <div class="status-indicator">
-        <div class="status-dot"></div>
-        <span class="status-text">同事在线</span>
-      </div>
-      <div class="session-info">会话 #ESP-2024</div>
-    </div>
-  </div>
-
-  <!-- 聊天主区域 -->
-  <div class="chat-main">
-    <div id="messagesContainer" class="messages-area">
-      <!-- 动态插入消息 -->
-    </div>
-
-    <!-- 需要输入的内容提示区 -->
-    <div id="requiredInputContainer" class="required-input-container" style="display: none;">
-      <!-- 动态插入提示卡片 -->
-    </div>
-
-    <!-- 输入区域 -->
-    <div class="input-area">
-      <div class="input-hint">
-        <span class="hint-text" id="roundHint">💬 请至少完成3轮对话</span>
-        <span class="round-badge" id="roundCounter">0 / 3 轮</span>
-      </div>
-      <div class="input-wrapper">
-        <textarea id="userInput" placeholder="请在此输入..." rows="1" maxlength="500"></textarea>
-        <button id="sendButton" class="send-btn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-  (function() {
-    // ----- DOM元素 -----
-    const messagesContainer = document.getElementById('messagesContainer');
-    const requiredInputContainer = document.getElementById('requiredInputContainer');
-    const userInput = document.getElementById('userInput');
-    const sendButton = document.getElementById('sendButton');
-    const roundHint = document.getElementById('roundHint');
-    const roundCounter = document.getElementById('roundCounter');
-
-    // ----- 状态管理 -----
-    let currentRound = 0;
-    let completedThreeRounds = false;
-    let isWaitingForReply = false;
-    let currentTypingIndicator = null;
-    let initializationComplete = false;
-    let conversationContext = [];
-
-    // ----- 预定义对话内容（同事版本）-----
-    const SYSTEM_CONNECT_MSG = "系统已为你连接你的同事";
-    const COLLEAGUE_GREETING = "我是您的同事小李，可以向我吐槽、宣泄或倾诉刚才遇到的顾客事件。";
-    
-    const ROUND1_USER_PROMPT = "请向你的同事宣泄刚刚遇到的顾客事件，以及你的感受、情绪等";
-    const ROUND1_COLLEAGUE_REPLY = "听得出来，这让你感到了气愤和委屈。";
-
-    const ROUND2_USER_REQUIRED = "对啊！最让我难受的是，他居然用那种责备的语气说'热汤这么简单的事都办不到，这服务简直太差劲了'。他根本不知道厨房的规定，说得好像是我个人工作能力有问题一样，真的很打击我！";
-    const ROUND2_COLLEAGUE_REPLY = "在不了解规定的情况下，把问题归纳为你个人的能力问题，这种指责确实很不合理。";
-
-    const ROUND3_USER_REQUIRED = "唉当时那个场面，真的让我到心里堵得慌，感觉今晚的工作情绪全被这个人毁了";
-    const ROUND3_COLLEAGUE_REPLY = "碰上这种事，心情被影响是不可避免的。";
-
-    // ----- 智能回复系统（同事版本）-----
-    function generateSmartReply(userMessage) {
-      const message = userMessage.toLowerCase();
-      
-      const emotions = {
-        anger: ['生气', '愤怒', '火大', '气死', '过分', '讨厌', '烦躁', '恼火', '气愤'],
-        sadness: ['难过', '伤心', '委屈', '想哭', '难受', '心酸', '沮丧', '失落', '堵得慌'],
-        frustration: ['无奈', '没办法', '烦', '压力', '累', '疲惫', '崩溃', '受不了'],
-        unfairness: ['不公平', '凭什么', '歧视', '偏心', '针对', '区别对待'],
-        helplessness: ['不知道怎么办', '无助', '迷茫', '困惑', '左右为难'],
-        improvement: ['好多了', '谢谢你', '有帮助', '明白了', '理解了', '接受'],
-        continuance: ['还有', '而且', '然后', '接着', '另外', '更糟的是'],
-      };
-      
-      let dominantEmotion = '';
-      let emotionScore = 0;
-      
-      for (const [emotion, keywords] of Object.entries(emotions)) {
-        const score = keywords.filter(keyword => message.includes(keyword)).length;
-        if (score > emotionScore) {
-          emotionScore = score;
-          dominantEmotion = emotion;
-        }
-      }
-      
-      const replyCategories = {
-        anger: [
-          "这种愤怒是完全可以理解的。面对不合理的指责，任何人都会感到愤怒。",
-          "你的愤怒很有道理。明明是对方不了解情况，却把责任推到你身上。",
-          "感受到你的怒火了。有时候顾客的一句话确实能点燃我们所有的不满。",
-          "愤怒是正常的情绪反应。重要的是你已经意识到了这一点，而不是压抑它。"
-        ],
-        sadness: [
-          "听到你这么说，我能感受到你的委屈。工作已经够辛苦了，还要承受这样的指责。",
-          "这种委屈感真的很折磨人。明明尽力了，却得不到应有的理解和尊重。",
-          "你的感受是完全合理的。服务工作本来就不容易，遇到这样的顾客更是雪上加霜。",
-          "心里堵得慌的时候，说出来的感觉会好很多。你已经做得很好了。"
-        ],
-        frustration: [
-          "是啊，服务行业就是这样，有时候真的让人感到无力。但你已经在尽力做好的路上了。",
-          "这种无力感我特别理解。规则不是你能改变的，却要你来承担后果。",
-          "工作中有太多我们无法控制的事情，但你的专业和努力是实实在在的。",
-          "每个人都会有这种无奈的时候。重要的是不要让它定义你的价值。"
-        ],
-        unfairness: [
-          "确实很不公平。别人不了解情况就随意批评，这种感受真的很难受。",
-          "被这样对待确实让人感到不公平。你的工作能力和价值不是由这样的评价决定的。",
-          "面对不公平的对待，你的感受完全正当。重要的是不要让他人的偏见影响你。",
-          "这种不公正的待遇确实令人沮丧。但你已经在处理得很好了。"
-        ],
-        helplessness: [
-          "这种感觉真的很煎熬。不过你已经在处理了，说出这些本身就是一种解决方式。",
-          "当感到无助的时候，找人倾诉是最明智的选择。你做得对。",
-          "每个人都有感到迷茫的时候，特别是在面对不合理的要求时。",
-          "暂时的无助不代表你不够好，而是说明你遇到了一个棘手的状况。"
-        ],
-        improvement: [
-          "很高兴听到你感觉好多了。情绪的起伏是正常的，重要的是你愿意面对它。",
-          "看到你慢慢理清思路，真的很棒。你已经比刚才平静多了。",
-          "能帮到你我很开心。记住，任何时候需要倾诉，我都在这里。",
-          "你的进步很明显。从情绪中走出来需要时间，你做得很好。"
-        ],
-        continuance: [
-          "嗯，继续说吧，把想说的都说出来会好受些。",
-          "我听着的，你继续说。把这些事情都说出来对你有帮助。",
-          "还有其他的吗？有时候把所有的委屈都说出来，心里会轻松很多。",
-          "继续说，别憋着。你的感受都值得被倾听。"
-        ]
-      };
-      
-      // 如果没有检测到明显情感，给出通用但多样的回复
-      const generalReplies = [
-        "我能理解你的感受。有时候说出来本身就是一种释放，我在这里认真听你说。",
-        "谢谢你愿意分享这些。工作中的这些经历确实值得被认真对待。",
-        "听你这么说，我更能理解你的处境了。你处理得很成熟。",
-        "每个人都有情绪低落的时候，你能这样表达出来已经很勇敢了。",
-        "你的感受很重要。不要怀疑自己的情绪，它们都是真实且有意义的。",
-        "服务行业确实充满挑战，但你的专业和耐心一直都很出色。",
-        "面对这样的情况，你的反应是完全正常的。重要的是你意识到了自己的情绪。",
-        "有时候我们需要的就是一个倾听的耳朵。我会一直在这里。"
-      ];
-
-      
-      let selectedReplies;
-      if (dominantEmotion && replyCategories[dominantEmotion]) {
-        selectedReplies = replyCategories[dominantEmotion];
-      } else {
-        selectedReplies = generalReplies;
-      }
-      
-      const recentReplies = conversationContext.slice(-3);
-      const availableReplies = selectedReplies.filter(reply => !recentReplies.includes(reply));
-      const finalReplies = availableReplies.length > 0 ? availableReplies : generalReplies;
-      const selectedReply = finalReplies[Math.floor(Math.random() * finalReplies.length)];
-      
-      conversationContext.push(selectedReply);
-      if (conversationContext.length > 10) {
-        conversationContext = conversationContext.slice(-10);
-      }
-      
-      return selectedReply;
-    }
-
-    // ----- 模糊匹配函数 -----
-    function fuzzyMatch(input, target) {
-      const cleanInput = input.trim();
-      const cleanTarget = target.trim();
-      
-      if (cleanInput === cleanTarget) return true;
-      
-      const stripPunctuation = (str) => {
-        return str.replace(/[，。！？、；：""''《》（）…—\s,\.!\?;:'"()\[\]{}…\-]/g, '');
-      };
-      
-      const inputNoPunct = stripPunctuation(cleanInput);
-      const targetNoPunct = stripPunctuation(cleanTarget);
-      
-      if (inputNoPunct === targetNoPunct) return true;
-      
-      const similarity = calculateSimilarity(inputNoPunct, targetNoPunct);
-      return similarity >= 0.7;
-    }
-    
-    function calculateSimilarity(str1, str2) {
-      const longer = str1.length > str2.length ? str1 : str2;
-      const shorter = str1.length > str2.length ? str2 : str1;
-      
-      if (longer.length === 0) return 1.0;
-      
-      const editDistance = levenshteinDistance(shorter, longer);
-      return (longer.length - editDistance) / parseFloat(longer.length);
-    }
-    
-    function levenshteinDistance(s1, s2) {
-      const len1 = s1.length;
-      const len2 = s2.length;
-      
-      const matrix = [];
-      
-      for (let i = 0; i <= len1; i++) {
-        matrix[i] = [i];
-      }
-      
-      for (let j = 0; j <= len2; j++) {
-        matrix[0][j] = j;
-      }
-      
-      for (let i = 1; i <= len1; i++) {
-        for (let j = 1; j <= len2; j++) {
-          if (s1.charAt(i - 1) === s2.charAt(j - 1)) {
-            matrix[i][j] = matrix[i - 1][j - 1];
-          } else {
-            matrix[i][j] = Math.min(
-              matrix[i - 1][j - 1] + 1,
-              matrix[i][j - 1] + 1,
-              matrix[i - 1][j] + 1
-            );
-          }
-        }
-      }
-      
-      return matrix[len1][len2];
-    }
-
-    // ----- 禁止复制粘贴 -----
-    function disableCopyPaste() {
-      document.addEventListener('contextmenu', (e) => {
-        if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') {
-          return true;
-        }
-        e.preventDefault();
-        return false;
-      });
-
-      document.addEventListener('paste', (e) => {
-        e.preventDefault();
-        alert('⚠️ 为保证效果，请手动输入内容，不要复制粘贴');
-        return false;
-      });
-
-      document.addEventListener('dragstart', (e) => {
-        e.preventDefault();
-        return false;
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if ((e.ctrlKey || e.metaKey) && e.key === 'v') {
-          e.preventDefault();
-          alert('⚠️ 为保证效果，请手动输入内容，不要复制粘贴');
-          return false;
-        }
-      });
-    }
-
-    // ----- 工具函数 -----
-    function scrollToBottom() {
-      messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
-
-    function createMessageRow(role) {
-      const rowDiv = document.createElement('div');
-      rowDiv.className = `message-row ${role}`;
-      
-      const avatarDiv = document.createElement('div');
-      avatarDiv.className = `avatar ${role === 'colleague' ? 'colleague-avatar' : 'user-avatar'}`;
-      
-      const bubbleDiv = document.createElement('div');
-      bubbleDiv.className = 'bubble';
-      
-      if (role === 'colleague') {
-        rowDiv.appendChild(avatarDiv);
-        rowDiv.appendChild(bubbleDiv);
-      } else {
-        rowDiv.appendChild(bubbleDiv);
-        rowDiv.appendChild(avatarDiv);
-      }
-      
-      return { rowDiv, bubbleDiv };
-    }
-
-    function appendSystemMessage(text) {
-      const systemDiv = document.createElement('div');
-      systemDiv.className = 'system-message';
-      systemDiv.innerHTML = `
-        <div class="system-badge">
-          <span>🔗</span>
-          <span>${text}</span>
-        </div>
-      `;
-      messagesContainer.appendChild(systemDiv);
-      scrollToBottom();
-    }
-
-    function typeWriterEffect(bubbleElement, fullText, onComplete) {
-      let index = 0;
-      bubbleElement.textContent = '';
-      
-      const cursor = document.createElement('span');
-      cursor.className = 'typewriter-cursor';
-      bubbleElement.appendChild(cursor);
-      
-      function typeNextChar() {
-        if (index < fullText.length) {
-          const textNode = document.createTextNode(fullText[index]);
-          bubbleElement.insertBefore(textNode, cursor);
-          index++;
-          const randomSpeed = Math.floor(Math.random() * 35) + 35;
-          scrollToBottom();
-          setTimeout(typeNextChar, randomSpeed);
-        } else {
-          if (cursor && cursor.parentNode) {
-            cursor.parentNode.removeChild(cursor);
-          }
-          scrollToBottom();
-          if (onComplete) onComplete();
-        }
-      }
-      
-      typeNextChar();
-    }
-
-    function appendColleagueMessage(text, withTypewriter = true, onComplete = null) {
-      const { rowDiv, bubbleDiv } = createMessageRow('colleague');
-      messagesContainer.appendChild(rowDiv);
-      scrollToBottom();
-      
-      if (withTypewriter) {
-        typeWriterEffect(bubbleDiv, text, onComplete);
-      } else {
-        bubbleDiv.textContent = text;
-        if (onComplete) onComplete();
-      }
-      
-      return rowDiv;
-    }
-
-    function appendUserMessage(text) {
-      const { rowDiv, bubbleDiv } = createMessageRow('user');
-      bubbleDiv.textContent = text;
-      messagesContainer.appendChild(rowDiv);
-      scrollToBottom();
-    }
-
-    function showTypingIndicator() {
-      removeTypingIndicator();
-      
-      const rowDiv = document.createElement('div');
-      rowDiv.className = 'message-row colleague';
-      rowDiv.id = 'typingIndicatorRow';
-      
-      const avatarDiv = document.createElement('div');
-      avatarDiv.className = 'avatar colleague-avatar';
-      
-      const indicatorDiv = document.createElement('div');
-      indicatorDiv.className = 'typing-indicator';
-      indicatorDiv.innerHTML = `
-        <span>同事正在输入中</span>
-        <div class="typing-dots">
-          <div class="typing-dot"></div>
-          <div class="typing-dot"></div>
-          <div class="typing-dot"></div>
-        </div>
-      `;
-      
-      rowDiv.appendChild(avatarDiv);
-      rowDiv.appendChild(indicatorDiv);
-      messagesContainer.appendChild(rowDiv);
-      currentTypingIndicator = rowDiv;
-      scrollToBottom();
-    }
-
-    function removeTypingIndicator() {
-      if (currentTypingIndicator && currentTypingIndicator.parentNode) {
-        currentTypingIndicator.parentNode.removeChild(currentTypingIndicator);
-        currentTypingIndicator = null;
-      }
-    }
-
-    function showRequiredInput(roundNumber, requiredText, delay = 0) {
-      setTimeout(() => {
-        requiredInputContainer.style.display = 'block';
-        requiredInputContainer.innerHTML = `
-          <div class="required-input-card">
-            <div class="card-header">
-              <span class="card-icon">📝</span>
-              <span class="card-title">第 ${roundNumber} 轮 · 参考内容（请按大意输入）</span>
+    <div class="app-container">
+        <div class="app-header">
+            <div class="header-left">
+                <div class="platform-logo">🛡️</div>
+                <div>
+                    <div class="platform-title">数字化员工支持平台</div>
+                    <div class="platform-subtitle">Employee Support Platform</div>
+                </div>
             </div>
-            <div class="card-content">${requiredText}</div>
-            <div class="card-hint">
-              <span>💡</span>
-              <span>请根据以上内容，用自己的话表达相似的意思即可</span>
+            <div class="header-right">
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    <span class="status-text">同事在线</span>
+                </div>
+                <div class="session-info">会话 #ESP-2024</div>
             </div>
-          </div>
-        `;
-      }, delay);
-    }
+        </div>
 
-    function hideRequiredInput() {
-      requiredInputContainer.style.display = 'none';
-      requiredInputContainer.innerHTML = '';
-    }
+        <div class="chat-main">
+            <div id="messagesContainer" class="messages-area"></div>
 
-    function updateRoundDisplay() {
-      roundCounter.textContent = `${currentRound} / 3 轮`;
-      if (currentRound >= 3) {
-        roundHint.innerHTML = '✅ 已完成3轮对话，你可以继续自由交流';
-        completedThreeRounds = true;
-        hideRequiredInput();
-      } else {
-        roundHint.innerHTML = '💬 请至少完成3轮对话';
-      }
-    }
+            <div id="requiredInputContainer" class="required-input-container" style="display: none;"></div>
 
-    function updatePlaceholder() {
-      if (completedThreeRounds) {
-        userInput.placeholder = "想说什么都可以，我在这里...";
-      } else if (currentRound === 0) {
-        userInput.placeholder = ROUND1_USER_PROMPT;
-        hideRequiredInput();
-      } else if (currentRound === 1) {
-        userInput.placeholder = "请根据上方参考内容，表达你的感受...";
-      } else if (currentRound === 2) {
-        userInput.placeholder = "请根据上方参考内容，表达你的感受...";
-      }
-    }
+            <div class="input-area">
+                <div class="input-hint">
+                    <span class="hint-text" id="roundHint">💬 请至少完成3轮对话</span>
+                    <span class="round-badge" id="roundCounter">0 / 3 轮</span>
+                </div>
+                <div class="input-wrapper">
+                    <textarea id="userInput" placeholder="请在此输入..." rows="1" maxlength="500"></textarea>
+                    <button id="sendButton" class="send-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    function setInputEnabled(enabled) {
-      if (enabled) {
-        sendButton.classList.remove('disabled');
-        userInput.disabled = false;
-      } else {
-        sendButton.classList.add('disabled');
-        userInput.disabled = true;
-      }
-    }
+    <script>
+        (function() {
+            const messagesContainer = document.getElementById('messagesContainer');
+            const requiredInputContainer = document.getElementById('requiredInputContainer');
+            const userInput = document.getElementById('userInput');
+            const sendButton = document.getElementById('sendButton');
+            const roundHint = document.getElementById('roundHint');
+            const roundCounter = document.getElementById('roundCounter');
 
-    function sendColleagueReply(replyText, onComplete = null) {
-      showTypingIndicator();
-      setInputEnabled(false);
-      isWaitingForReply = true;
-      
-      setTimeout(() => {
-        removeTypingIndicator();
-        appendColleagueMessage(replyText, true, () => {
-          setInputEnabled(true);
-          isWaitingForReply = false;
-          userInput.focus();
-          if (onComplete) onComplete();
-        });
-      }, 3000);
-    }
+            let currentRound = 0;
+            let completedThreeRounds = false;
+            let isWaitingForReply = false;
+            let currentTypingIndicator = null;
+            let initializationComplete = false;
+            let conversationContext = [];
 
-    // ----- 初始化序列 -----
-    async function initializePlatform() {
-      await new Promise(resolve => setTimeout(resolve, 800));
-      appendSystemMessage(SYSTEM_CONNECT_MSG);
-      
-      await new Promise(resolve => setTimeout(resolve, 1200));
-      await new Promise(resolve => {
-        appendColleagueMessage(COLLEAGUE_GREETING, true, resolve);
-      });
-      
-      await new Promise(resolve => setTimeout(resolve, 500));
-      updateRoundDisplay();
-      updatePlaceholder();
-      setInputEnabled(true);
-      userInput.focus();
-      initializationComplete = true;
-    }
+            const SYSTEM_CONNECT_MSG = "系统已为你连接你的同事";
+            const COLLEAGUE_GREETING = "我是您的同事小李，可以向我吐槽、宣泄或倾诉刚才遇到的顾客事件。";
 
-    // ----- 消息发送处理 -----
-    function handleSendMessage() {
-      if (!initializationComplete) return;
-      if (isWaitingForReply) {
-        alert('请等待同事回复后再发送消息');
-        return;
-      }
-      
-      const trimmedText = userInput.value.trim();
-      if (trimmedText === '') {
-        alert('请输入内容');
-        return;
-      }
+            const ROUND1_USER_PROMPT = "刚才快打烊的时候遇到一个特别不讲理的顾客。他嫌汤凉非要加热，可当时厨房都关了、厨师都下班了，我特别客气、好声好气地跟他解释，结果他连话都不让我说完，直接冲我大吼大叫，骂我态度差，最后居然还冲我摔勺子走人。我真的好生气，又觉得特别委屈，凭什么把气撒在我头上啊？";
+            const ROUND1_COLLEAGUE_REPLY = "听得出来，这让你感到了气愤和委屈。";
 
-      if (!completedThreeRounds) {
-        if (currentRound === 1 && !fuzzyMatch(trimmedText, ROUND2_USER_REQUIRED)) {
-          alert('⚠️ 输入内容与参考内容差异较大\n请参考上方显示的内容，用你自己的话表达相似的意思\n不需要完全一样，但核心意思要相近哦！');
-          return;
-        }
-        if (currentRound === 2 && !fuzzyMatch(trimmedText, ROUND3_USER_REQUIRED)) {
-          alert('⚠️ 输入内容与参考内容差异较大\n请参考上方显示的内容，用你自己的话表达相似的意思\n不需要完全一样，但核心意思要相近哦！');
-          return;
-        }
-      }
+            const ROUND2_USER_REQUIRED = "对啊！最让我难受的是，他居然用那种责备的语气说'热汤这么简单的事都办不到，这服务简直太差劲了'。他根本不知道厨房的规定，说得好像是我个人工作能力有问题一样，真的很打击我！";
+            const ROUND2_COLLEAGUE_REPLY = "在不了解规定的情况下，把问题归纳为你个人的能力问题，这种指责确实很不合理。";
 
-      conversationContext.push(trimmedText);
-      if (conversationContext.length > 20) {
-        conversationContext = conversationContext.slice(-20);
-      }
+            const ROUND3_USER_REQUIRED = "唉当时那个场面，真的让我到心里堵得慌，感觉今晚的工作情绪全被这个人毁了";
+            const ROUND3_COLLEAGUE_REPLY = "碰上这种事，心情被影响是不可避免的。";
 
-      appendUserMessage(trimmedText);
-      userInput.value = '';
+            function generateSmartReply(userMessage) {
+                const message = userMessage.toLowerCase();
 
-      let colleagueResponse = '';
-      if (!completedThreeRounds) {
-        if (currentRound === 0) {
-          colleagueResponse = ROUND1_COLLEAGUE_REPLY;
-          
-          sendColleagueReply(colleagueResponse, () => {
-            setTimeout(() => {
-              showRequiredInput(2, ROUND2_USER_REQUIRED);
-            }, 1500);
-          });
-          
-          currentRound++;
-          updateRoundDisplay();
-          updatePlaceholder();
-        } else if (currentRound === 1) {
-          colleagueResponse = ROUND2_COLLEAGUE_REPLY;
-          
-          sendColleagueReply(colleagueResponse, () => {
-            setTimeout(() => {
-              showRequiredInput(3, ROUND3_USER_REQUIRED);
-            }, 1500);
-          });
-          
-          currentRound++;
-          updateRoundDisplay();
-          updatePlaceholder();
-          hideRequiredInput();
-        } else if (currentRound === 2) {
-          colleagueResponse = ROUND3_COLLEAGUE_REPLY;
-          
-          sendColleagueReply(colleagueResponse);
-          
-          currentRound++;
-          updateRoundDisplay();
-          updatePlaceholder();
-          hideRequiredInput();
-        }
-      } else {
-        colleagueResponse = generateSmartReply(trimmedText);
-        
-        currentRound++;
-        updateRoundDisplay();
-        updatePlaceholder();
-        sendColleagueReply(colleagueResponse);
-      }
-    }
+                const emotions = {
+                    anger: ['生气', '愤怒', '火大', '气死', '过分', '讨厌', '烦躁', '恼火', '气愤'],
+                    sadness: ['难过', '伤心', '委屈', '想哭', '难受', '心酸', '沮丧', '失落', '堵得慌'],
+                    frustration: ['无奈', '没办法', '烦', '压力', '累', '疲惫', '崩溃', '受不了'],
+                    unfairness: ['不公平', '凭什么', '歧视', '偏心', '针对', '区别对待'],
+                    helplessness: ['不知道怎么办', '无助', '迷茫', '困惑', '左右为难'],
+                    improvement: ['好多了', '谢谢你', '有帮助', '明白了', '理解了', '接受'],
+                    continuance: ['还有', '而且', '然后', '接着', '另外', '更糟的是'],
+                };
 
-    // ----- 事件绑定 -----
-    sendButton.addEventListener('click', handleSendMessage);
-    userInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        handleSendMessage();
-      }
-    });
+                let dominantEmotion = '';
+                let emotionScore = 0;
 
-    userInput.addEventListener('input', () => {
-      userInput.style.height = 'auto';
-      userInput.style.height = Math.min(userInput.scrollHeight, 100) + 'px';
-    });
+                for (const [emotion, keywords] of Object.entries(emotions)) {
+                    const score = keywords.filter(keyword => message.includes(keyword)).length;
+                    if (score > emotionScore) {
+                        emotionScore = score;
+                        dominantEmotion = emotion;
+                    }
+                }
 
-    // ----- 启动平台 -----
-    setInputEnabled(false);
-    disableCopyPaste();
-    initializePlatform();
-  })();
-</script>
+                const replyCategories = {
+                    anger: [
+                        "这种愤怒是完全可以理解的。面对不合理的指责，任何人都会感到愤怒。",
+                        "你的愤怒很有道理。明明是对方不了解情况，却把责任推到你身上。",
+                        "感受到你的怒火了。有时候顾客的一句话确实能点燃我们所有的不满。",
+                        "愤怒是正常的情绪反应。重要的是你已经意识到了这一点，而不是压抑它。"
+                    ],
+                    sadness: [
+                        "听到你这么说，我能感受到你的委屈。工作已经够辛苦了，还要承受这样的指责。",
+                        "这种委屈感真的很折磨人。明明尽力了，却得不到应有的理解和尊重。",
+                        "你的感受是完全合理的。服务工作本来就不容易，遇到这样的顾客更是雪上加霜。",
+                        "心里堵得慌的时候，说出来的感觉会好很多。你已经做得很好了。"
+                    ],
+                    frustration: [
+                        "是啊，服务行业就是这样，有时候真的让人感到无力。但你已经在尽力做好的路上了。",
+                        "这种无力感我特别理解。规则不是你能改变的，却要你来承担后果。",
+                        "工作中有太多我们无法控制的事情，但你的专业和努力是实实在在的。",
+                        "每个人都会有这种无奈的时候。重要的是不要让它定义你的价值。"
+                    ],
+                    unfairness: [
+                        "确实很不公平。别人不了解情况就随意批评，这种感受真的很难受。",
+                        "被这样对待确实让人感到不公平。你的工作能力和价值不是由这样的评价决定的。",
+                        "面对不公平的对待，你的感受完全正当。重要的是不要让他人的偏见影响你。",
+                        "这种不公正的待遇确实令人沮丧。但你已经在处理得很好了。"
+                    ],
+                    helplessness: [
+                        "这种感觉真的很煎熬。不过你已经在处理了，说出这些本身就是一种解决方式。",
+                        "当感到无助的时候，找人倾诉是最明智的选择。你做得对。",
+                        "每个人都有感到迷茫的时候，特别是在面对不合理的要求时。",
+                        "暂时的无助不代表你不够好，而是说明你遇到了一个棘手的状况。"
+                    ],
+                    improvement: [
+                        "很高兴听到你感觉好多了。情绪的起伏是正常的，重要的是你愿意面对它。",
+                        "看到你慢慢理清思路，真的很棒。你已经比刚才平静多了。",
+                        "能帮到你我很开心。记住，任何时候需要倾诉，我都在这里。",
+                        "你的进步很明显。从情绪中走出来需要时间，你做得很好。"
+                    ],
+                    continuance: [
+                        "嗯，继续说吧，把想说的都说出来会好受些。",
+                        "我听着的，你继续说。把这些事情都说出来对你有帮助。",
+                        "还有其他的吗？有时候把所有的委屈都说出来，心里会轻松很多。",
+                        "继续说，别憋着。你的感受都值得被倾听。"
+                    ]
+                };
+
+                const generalReplies = [
+                    "我能理解你的感受。有时候说出来本身就是一种释放，我在这里认真听你说。",
+                    "谢谢你愿意分享这些。工作中的这些经历确实值得被认真对待。",
+                    "听你这么说，我更能理解你的处境了。你处理得很成熟。",
+                    "每个人都有情绪低落的时候，你能这样表达出来已经很勇敢了。",
+                    "你的感受很重要。不要怀疑自己的情绪，它们都是真实且有意义的。",
+                    "服务行业确实充满挑战，但你的专业和耐心一直都很出色。",
+                    "面对这样的情况，你的反应是完全正常的。重要的是你意识到了自己的情绪。",
+                    "有时候我们需要的就是一个倾听的耳朵。我会一直在这里。"
+                ];
+
+                let selectedReplies;
+                if (dominantEmotion && replyCategories[dominantEmotion]) {
+                    selectedReplies = replyCategories[dominantEmotion];
+                } else {
+                    selectedReplies = generalReplies;
+                }
+
+                const recentReplies = conversationContext.slice(-3);
+                const availableReplies = selectedReplies.filter(reply => !recentReplies.includes(reply));
+                const finalReplies = availableReplies.length > 0 ? availableReplies : generalReplies;
+                const selectedReply = finalReplies[Math.floor(Math.random() * finalReplies.length)];
+
+                conversationContext.push(selectedReply);
+                if (conversationContext.length > 10) {
+                    conversationContext = conversationContext.slice(-10);
+                }
+
+                return selectedReply;
+            }
+
+            function fuzzyMatch(input, target) {
+                const cleanInput = input.trim();
+                const cleanTarget = target.trim();
+
+                if (cleanInput === cleanTarget) return true;
+
+                const stripPunctuation = (str) => {
+                    return str.replace(/[，。！？、；：""''《》（）…—\s,\.!\?;:'"()\[\]{}…\-]/g, '');
+                };
+
+                const inputNoPunct = stripPunctuation(cleanInput);
+                const targetNoPunct = stripPunctuation(cleanTarget);
+
+                if (inputNoPunct === targetNoPunct) return true;
+
+                const similarity = calculateSimilarity(inputNoPunct, targetNoPunct);
+                return similarity >= 0.62;
+            }
+
+            function calculateSimilarity(str1, str2) {
+                const longer = str1.length > str2.length ? str1 : str2;
+                const shorter = str1.length > str2.length ? str2 : str1;
+
+                if (longer.length === 0) return 1.0;
+
+                const editDistance = levenshteinDistance(shorter, longer);
+                return (longer.length - editDistance) / parseFloat(longer.length);
+            }
+
+            function levenshteinDistance(s1, s2) {
+                const len1 = s1.length;
+                const len2 = s2.length;
+
+                const matrix = [];
+
+                for (let i = 0; i <= len1; i++) {
+                    matrix[i] = [i];
+                }
+
+                for (let j = 0; j <= len2; j++) {
+                    matrix[0][j] = j;
+                }
+
+                for (let i = 1; i <= len1; i++) {
+                    for (let j = 1; j <= len2; j++) {
+                        if (s1.charAt(i - 1) === s2.charAt(j - 1)) {
+                            matrix[i][j] = matrix[i - 1][j - 1];
+                        } else {
+                            matrix[i][j] = Math.min(
+                                matrix[i - 1][j - 1] + 1,
+                                matrix[i][j - 1] + 1,
+                                matrix[i - 1][j] + 1
+                            );
+                        }
+                    }
+                }
+
+                return matrix[len1][len2];
+            }
+
+            function disableCopyPaste() {
+                document.addEventListener('contextmenu', (e) => {
+                    if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') {
+                        return true;
+                    }
+                    e.preventDefault();
+                    return false;
+                });
+
+                document.addEventListener('paste', (e) => {
+                    e.preventDefault();
+                    alert('⚠️ 为保证效果，请手动输入内容，不要复制粘贴');
+                    return false;
+                });
+
+                document.addEventListener('dragstart', (e) => {
+                    e.preventDefault();
+                    return false;
+                });
+
+                document.addEventListener('keydown', (e) => {
+                    if ((e.ctrlKey || e.metaKey) && e.key === 'v') {
+                        e.preventDefault();
+                        alert('⚠️ 为保证效果，请手动输入内容，不要复制粘贴');
+                        return false;
+                    }
+                });
+            }
+
+            function scrollToBottom() {
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
+
+            function createMessageRow(role) {
+                const rowDiv = document.createElement('div');
+                rowDiv.className = `message-row ${role}`;
+
+                const avatarDiv = document.createElement('div');
+                avatarDiv.className = `avatar ${role === 'colleague' ? 'colleague-avatar' : 'user-avatar'}`;
+
+                const bubbleDiv = document.createElement('div');
+                bubbleDiv.className = 'bubble';
+
+                if (role === 'colleague') {
+                    rowDiv.appendChild(avatarDiv);
+                    rowDiv.appendChild(bubbleDiv);
+                } else {
+                    rowDiv.appendChild(bubbleDiv);
+                    rowDiv.appendChild(avatarDiv);
+                }
+
+                return { rowDiv, bubbleDiv };
+            }
+
+            function appendSystemMessage(text) {
+                const systemDiv = document.createElement('div');
+                systemDiv.className = 'system-message';
+                systemDiv.innerHTML = `
+                    <div class="system-badge">
+                        <span>🔗</span>
+                        <span>${text}</span>
+                    </div>
+                `;
+                messagesContainer.appendChild(systemDiv);
+                scrollToBottom();
+            }
+
+            function typeWriterEffect(bubbleElement, fullText, onComplete) {
+                let index = 0;
+                bubbleElement.textContent = '';
+
+                const cursor = document.createElement('span');
+                cursor.className = 'typewriter-cursor';
+                bubbleElement.appendChild(cursor);
+
+                function typeNextChar() {
+                    if (index < fullText.length) {
+                        const textNode = document.createTextNode(fullText[index]);
+                        bubbleElement.insertBefore(textNode, cursor);
+                        index++;
+                        const randomSpeed = Math.floor(Math.random() * 35) + 35;
+                        scrollToBottom();
+                        setTimeout(typeNextChar, randomSpeed);
+                    } else {
+                        if (cursor && cursor.parentNode) {
+                            cursor.parentNode.removeChild(cursor);
+                        }
+                        scrollToBottom();
+                        if (onComplete) onComplete();
+                    }
+                }
+
+                typeNextChar();
+            }
+
+            function appendColleagueMessage(text, withTypewriter = true, onComplete = null) {
+                const { rowDiv, bubbleDiv } = createMessageRow('colleague');
+                messagesContainer.appendChild(rowDiv);
+                scrollToBottom();
+
+                if (withTypewriter) {
+                    typeWriterEffect(bubbleDiv, text, onComplete);
+                } else {
+                    bubbleDiv.textContent = text;
+                    if (onComplete) onComplete();
+                }
+
+                return rowDiv;
+            }
+
+            function appendUserMessage(text) {
+                const { rowDiv, bubbleDiv } = createMessageRow('user');
+                bubbleDiv.textContent = text;
+                messagesContainer.appendChild(rowDiv);
+                scrollToBottom();
+            }
+
+            function showTypingIndicator() {
+                removeTypingIndicator();
+
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'message-row colleague';
+                rowDiv.id = 'typingIndicatorRow';
+
+                const avatarDiv = document.createElement('div');
+                avatarDiv.className = 'avatar colleague-avatar';
+
+                const indicatorDiv = document.createElement('div');
+                indicatorDiv.className = 'typing-indicator';
+                indicatorDiv.innerHTML = `
+                    <span>同事正在输入中</span>
+                    <div class="typing-dots">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                `;
+
+                rowDiv.appendChild(avatarDiv);
+                rowDiv.appendChild(indicatorDiv);
+                messagesContainer.appendChild(rowDiv);
+                currentTypingIndicator = rowDiv;
+                scrollToBottom();
+            }
+
+            function removeTypingIndicator() {
+                if (currentTypingIndicator && currentTypingIndicator.parentNode) {
+                    currentTypingIndicator.parentNode.removeChild(currentTypingIndicator);
+                    currentTypingIndicator = null;
+                }
+            }
+
+            function showRequiredInput(roundNumber, requiredText, delay = 0) {
+                setTimeout(() => {
+                    requiredInputContainer.style.display = 'block';
+                    requiredInputContainer.innerHTML = `
+                        <div class="required-input-card">
+                            <div class="card-header">
+                                <span class="card-icon">📝</span>
+                                <span class="card-title">第 ${roundNumber} 轮 · 参考内容（请按大意输入）</span>
+                            </div>
+                            <div class="card-content">${requiredText}</div>
+                            <div class="card-hint">
+                                <span>💡</span>
+                                <span>请根据以上内容，用自己的话表达相似的意思即可</span>
+                            </div>
+                        </div>
+                    `;
+                }, delay);
+            }
+
+            function hideRequiredInput() {
+                requiredInputContainer.style.display = 'none';
+                requiredInputContainer.innerHTML = '';
+            }
+
+            function updateRoundDisplay() {
+                roundCounter.textContent = `${currentRound} / 3 轮`;
+                if (currentRound >= 3) {
+                    roundHint.innerHTML = '✅ 已完成3轮对话，你可以继续自由交流';
+                    completedThreeRounds = true;
+                    hideRequiredInput();
+                } else {
+                    roundHint.innerHTML = '💬 请至少完成3轮对话';
+                }
+            }
+
+            function updatePlaceholder() {
+                if (completedThreeRounds) {
+                    userInput.placeholder = "想说什么都可以，我在这里...";
+                } else if (currentRound === 0) {
+                    userInput.placeholder = "请根据上方参考内容，表达你的感受...";
+                    showRequiredInput(1, ROUND1_USER_PROMPT);
+                } else if (currentRound === 1) {
+                    userInput.placeholder = "请根据上方参考内容，表达你的感受...";
+                } else if (currentRound === 2) {
+                    userInput.placeholder = "请根据上方参考内容，表达你的感受...";
+                }
+            }
+
+            function setInputEnabled(enabled) {
+                if (enabled) {
+                    sendButton.classList.remove('disabled');
+                    userInput.disabled = false;
+                } else {
+                    sendButton.classList.add('disabled');
+                    userInput.disabled = true;
+                }
+            }
+
+            function sendColleagueReply(replyText, onComplete = null) {
+                showTypingIndicator();
+                setInputEnabled(false);
+                isWaitingForReply = true;
+
+                setTimeout(() => {
+                    removeTypingIndicator();
+                    appendColleagueMessage(replyText, true, () => {
+                        setInputEnabled(true);
+                        isWaitingForReply = false;
+                        userInput.focus();
+                        if (onComplete) onComplete();
+                    });
+                }, 3000);
+            }
+
+            async function initializePlatform() {
+                await new Promise(resolve => setTimeout(resolve, 800));
+                appendSystemMessage(SYSTEM_CONNECT_MSG);
+
+                await new Promise(resolve => setTimeout(resolve, 1200));
+                await new Promise(resolve => {
+                    appendColleagueMessage(COLLEAGUE_GREETING, true, resolve);
+                });
+
+                await new Promise(resolve => setTimeout(resolve, 500));
+                updateRoundDisplay();
+                updatePlaceholder();
+                setInputEnabled(true);
+                userInput.focus();
+                initializationComplete = true;
+            }
+
+            function handleSendMessage() {
+                if (!initializationComplete) return;
+                if (isWaitingForReply) {
+                    alert('请等待同事回复后再发送消息');
+                    return;
+                }
+
+                const trimmedText = userInput.value.trim();
+                if (trimmedText === '') {
+                    alert('请输入内容');
+                    return;
+                }
+
+                if (!completedThreeRounds) {
+                    if (currentRound === 0 && !fuzzyMatch(trimmedText, ROUND1_USER_PROMPT)) {
+                        alert('⚠️ 输入内容与参考内容差异较大\n请参考上方显示的内容，用你自己的话表达相似的意思\n不需要完全一样，但核心意思要相近哦！');
+                        return;
+                    }
+                    if (currentRound === 1 && !fuzzyMatch(trimmedText, ROUND2_USER_REQUIRED)) {
+                        alert('⚠️ 输入内容与参考内容差异较大\n请参考上方显示的内容，用你自己的话表达相似的意思\n不需要完全一样，但核心意思要相近哦！');
+                        return;
+                    }
+                    if (currentRound === 2 && !fuzzyMatch(trimmedText, ROUND3_USER_REQUIRED)) {
+                        alert('⚠️ 输入内容与参考内容差异较大\n请参考上方显示的内容，用你自己的话表达相似的意思\n不需要完全一样，但核心意思要相近哦！');
+                        return;
+                    }
+                }
+
+                conversationContext.push(trimmedText);
+                if (conversationContext.length > 20) {
+                    conversationContext = conversationContext.slice(-20);
+                }
+
+                appendUserMessage(trimmedText);
+                userInput.value = '';
+
+                let colleagueResponse = '';
+                if (!completedThreeRounds) {
+                    if (currentRound === 0) {
+                        colleagueResponse = ROUND1_COLLEAGUE_REPLY;
+
+                        sendColleagueReply(colleagueResponse, () => {
+                            setTimeout(() => {
+                                showRequiredInput(2, ROUND2_USER_REQUIRED);
+                            }, 1500);
+                        });
+
+                        currentRound++;
+                        updateRoundDisplay();
+                        updatePlaceholder();
+                    } else if (currentRound === 1) {
+                        colleagueResponse = ROUND2_COLLEAGUE_REPLY;
+
+                        sendColleagueReply(colleagueResponse, () => {
+                            setTimeout(() => {
+                                showRequiredInput(3, ROUND3_USER_REQUIRED);
+                            }, 1500);
+                        });
+
+                        currentRound++;
+                        updateRoundDisplay();
+                        updatePlaceholder();
+                        hideRequiredInput();
+                    } else if (currentRound === 2) {
+                        colleagueResponse = ROUND3_COLLEAGUE_REPLY;
+
+                        sendColleagueReply(colleagueResponse);
+
+                        currentRound++;
+                        updateRoundDisplay();
+                        updatePlaceholder();
+                        hideRequiredInput();
+                    }
+                } else {
+                    colleagueResponse = generateSmartReply(trimmedText);
+
+                    currentRound++;
+                    updateRoundDisplay();
+                    updatePlaceholder();
+                    sendColleagueReply(colleagueResponse);
+                }
+            }
+
+            sendButton.addEventListener('click', handleSendMessage);
+            userInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSendMessage();
+                }
+            });
+
+            userInput.addEventListener('input', () => {
+                userInput.style.height = 'auto';
+                userInput.style.height = Math.min(userInput.scrollHeight, 100) + 'px';
+            });
+
+            setInputEnabled(false);
+            disableCopyPaste();
+            initializePlatform();
+        })();
+    </script>
 </body>
 </html>
